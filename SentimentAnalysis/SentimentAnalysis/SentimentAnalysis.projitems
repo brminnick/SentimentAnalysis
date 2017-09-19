@@ -9,19 +9,9 @@
     <Import_RootNamespace>SentimentAnalysis</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)App.cs">
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Services\TextAnalysis.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Views\" />
-    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage.cs" />
   </ItemGroup>
 </Project>
