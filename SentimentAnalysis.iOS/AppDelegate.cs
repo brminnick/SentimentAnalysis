@@ -9,7 +9,11 @@ namespace SentimentAnalysis.iOS
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new SentimentAnalysis.App());
+            LoadApplication(new App());
+
+#if DEBUG
+            Xamarin.Calabash.Start();
+#endif
 
             return base.FinishedLaunching(uiApplication, launchOptions);
         }

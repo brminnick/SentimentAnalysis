@@ -44,6 +44,20 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SentimentAnalysis.Android\SentimentAnalysis.Android.csproj">
+      <Project>{4CBB7725-6D9F-4F24-82F0-5F10C4A2EF89}</Project>
+      <Name>SentimentAnalysis.Android</Name>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SentimentAnalysis.iOS\SentimentAnalysis.iOS.csproj">
+      <Project>{FBABBEAC-B40F-4E5D-8DC6-298CDDA056BC}</Project>
+      <Name>SentimentAnalysis.iOS</Name>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\SentimentAnalysis.Shared\SentimentAnalysis.Shared.projitems" Label="Shared" Condition="Exists('..\SentimentAnalysis.Shared\SentimentAnalysis.Shared.projitems')" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
