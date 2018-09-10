@@ -1,4 +1,6 @@
 ﻿using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace SentimentAnalysis
 {
@@ -15,6 +17,8 @@ namespace SentimentAnalysis
 
             _viewModel = new SentimentViewModel();
             BindingContext = _viewModel;
+
+            On<iOS>().SetUseSafeArea(true);
         }
         #endregion
 

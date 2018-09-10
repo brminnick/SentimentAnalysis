@@ -28,6 +28,8 @@
         <Entry 
             Placeholder="Add Text here..."
             Text="{Binding UserInputEntryText}"
+            ReturnType="Go"
+            ReturnCommand="{Binding SubmitButtonCommand}"
             AutomationId="{x:Static sharedConstants:AutomationIdConstants.EnterTextBox}" />
 
         <sentimentAnalysis:SubmitButton
