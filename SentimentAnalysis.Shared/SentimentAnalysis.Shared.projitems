@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{92622ADA-5A68-49B0-8947-A7E32A7BC7AC}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SentimentAnalysis.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\AutomationIdConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\EmojiConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\PageTitles.cs" />
+  </ItemGroup>
+</Project>

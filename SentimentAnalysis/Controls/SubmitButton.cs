@@ -1,0 +1,17 @@
+﻿using Xamarin.Forms;
+
+namespace SentimentAnalysis
+{
+    public class SubmitButton : Button
+    {
+        public SubmitButton()
+        {
+            TextColor = Color.White;
+            BackgroundColor = Color.Transparent;
+            BorderColor = Color.White;
+            BorderRadius = 10;
+            BorderWidth = 2;
+        }
+    }
+}
+

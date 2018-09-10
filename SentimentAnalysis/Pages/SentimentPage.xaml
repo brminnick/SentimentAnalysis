@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:sharedConstants="clr-namespace:SentimentAnalysis.Shared;assembly=SentimentAnalysis"
+    x:Class="SentimentAnalysis.SentimentPage"
+    xmlns:sentimentAnalysis="clr-namespace:SentimentAnalysis"
+    IsBusy="{Binding IsInternetConnectionActive}"
+    BackgroundColor= "{Binding BackgroundColor}" >
+
+    <ContentPage.Padding>
+        <OnPlatform 
+            x:TypeArguments= "Thickness"
+            iOS= "0, 20, 0, 0" />
+    </ContentPage.Padding>
+
+   <StackLayout 
+        Padding = "30,5,30, 90"
+        VerticalOptions="StartAndExpand" >
+        
+        <Label
+            Text= "{x:Static sharedConstants:PageTitles.SentimentPage}"
+            TextColor= "White"
+            FontSize= "Large"
+            Margin= "10,10,10,50"
+            VerticalOptions= "Start" HorizontalOptions= "Center"/>
+
+        <Entry 
+            Placeholder="Add Text here..."
+            Text="{Binding UserInputEntryText}"
+            AutomationId="{x:Static sharedConstants:AutomationIdConstants.EnterTextBox}" />
+
+        <sentimentAnalysis:SubmitButton
+            Text= "Submit"
+            Margin= "50,10"
+            FontSize= "Large"
+            TextColor= "White"
+            Command="{Binding SubmitButtonCommand}"
+            IsEnabled="{Binding IsInternetConnectionInactive}"
+            BorderRadius="0" BorderWidth="1" BorderColor = "White"
+            HorizontalOptions= "FillAndExpand" VerticalOptions= "Center" 
+            AutomationId="{x:Static sharedConstants:AutomationIdConstants.SubmitButton}" />
+           
+        
+        <ActivityIndicator
+            Color= "White"
+            Margin= "20,20"
+            IsVisible="{Binding IsInternetConnectionActive}"
+            IsRunning="{Binding IsInternetConnectionActive}"
+            HorizontalOptions ="Center" VerticalOptions= "Center" 
+            AutomationId="{x:Static sharedConstants:AutomationIdConstants.ActivityIndicator}" />
+
+        <Label
+            IsVisible="{Binding IsInternetConnectionActive}"
+            TextColor= "White"
+            Text= "Calculating Sentiment..."
+            HorizontalOptions= "Center" VerticalOptions= "Center"/>
+        <Label
+            FontSize="100"
+            Text="{Binding EmojiLabelText}"
+            HorizontalTextAlignment="Center"
+            HorizontalOptions= "Center" VerticalOptions= "Center"
+            AutomationId="{x:Static sharedConstants:AutomationIdConstants.EmojiResultsLabel}" />
+        
+    </StackLayout>
+</ContentPage>
