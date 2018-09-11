@@ -55,7 +55,7 @@ namespace SentimentAnalysis
 
                 request.Headers.Add("Ocp-Apim-Subscription-Key", _subscriptionKey);
 
-                return Task.FromResult<object>(null);
+                return Task.CompletedTask;
             }
         }
         #endregion
