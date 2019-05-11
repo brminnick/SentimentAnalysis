@@ -1,63 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AE03B683-0423-4BFD-87C9-2D47A8A3AB35}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>SentimentAnalysis.UITest</RootNamespace>
-    <AssemblyName>SentimentAnalysis.UITest</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.UITest">
-      <HintPath>..\packages\Xamarin.UITest.2.2.6\lib\net45\Xamarin.UITest.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AppInitializer.cs" />
-    <Compile Include="Pages\BasePage.cs" />
-    <Compile Include="Pages\SentimentPage.cs" />
-    <Compile Include="Tests\BaseTest.cs" />
-    <Compile Include="Tests\SentimentTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SentimentAnalysis.Android\SentimentAnalysis.Android.csproj">
-      <Project>{4CBB7725-6D9F-4F24-82F0-5F10C4A2EF89}</Project>
-      <Name>SentimentAnalysis.Android</Name>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SentimentAnalysis.iOS\SentimentAnalysis.iOS.csproj">
-      <Project>{FBABBEAC-B40F-4E5D-8DC6-298CDDA056BC}</Project>
-      <Name>SentimentAnalysis.iOS</Name>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="..\SentimentAnalysis.Shared\SentimentAnalysis.Shared.projitems" Label="Shared" Condition="Exists('..\SentimentAnalysis.Shared\SentimentAnalysis.Shared.projitems')" />
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{AE03B683-0423-4BFD-87C9-2D47A8A3AB35}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <RootNamespace>SentimentAnalysis.UITest</RootNamespace>
+        <AssemblyName>SentimentAnalysis.UITest</AssemblyName>
+        <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+        <TargetFrameworkProfile />
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug</OutputPath>
+        <DefineConstants>DEBUG;</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release</OutputPath>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="AppInitializer.cs" />
+        <Compile Include="Pages\BasePage.cs" />
+        <Compile Include="Pages\SentimentPage.cs" />
+        <Compile Include="Tests\BaseTest.cs" />
+        <Compile Include="Tests\SentimentTests.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="NUnit" Version="3.11.0" />
+        <PackageReference Include="Xamarin.UITest" Version="3.0.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\SentimentAnalysis.Android\SentimentAnalysis.Android.csproj">
+            <Project>{4CBB7725-6D9F-4F24-82F0-5F10C4A2EF89}</Project>
+            <Name>SentimentAnalysis.Android</Name>
+            <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+            <Private>False</Private>
+        </ProjectReference>
+        <ProjectReference Include="..\SentimentAnalysis.iOS\SentimentAnalysis.iOS.csproj">
+            <Project>{FBABBEAC-B40F-4E5D-8DC6-298CDDA056BC}</Project>
+            <Name>SentimentAnalysis.iOS</Name>
+            <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+            <Private>False</Private>
+        </ProjectReference>
+    </ItemGroup>
+    <Import Project="..\SentimentAnalysis.Shared\SentimentAnalysis.Shared.projitems" Label="Shared" Condition="Exists('..\SentimentAnalysis.Shared\SentimentAnalysis.Shared.projitems')" />
+    <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

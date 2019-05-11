@@ -12,6 +12,13 @@ namespace SentimentAnalysis.UITest
         {
         }
 
+        public override void TestSetup()
+        {
+            base.TestSetup();
+
+            SentimentPage.WaitForPageToLoad();
+        }
+
         [Test]
         public void SentimentPage_SubmitHappyText_ResultShouldBeHappyFaceEmoji()
         {
