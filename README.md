@@ -40,8 +40,7 @@ Scores close to 0 indicate negative sentiment, while scores close to 1 indicate 
 
 ## Learn More
 
-Visit the Microsoft Docs to learn more about Cognitive Services:
-
-- [Cognitive Services](https://azure.microsoft.com/services/cognitive-services/?WT.mc_id=none-XamarinBlog-bramin)
-- [Text Analytics](https://azure.microsoft.com/services/cognitive-services/text-analytics/?WT.mc_id=none-XamarinBlog-bramin)
-- [Sentiment Analysis API](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c9/?WT.mc_id=none-XamarinBlog-bramin)
+- [Upgrade Your App With Sentiment Analysis | Microsoft Blog](https://devblogs.microsoft.com/xamarin/upgrade-your-app-with-sentiment-analysis?WT.mc_id=sentimentanalysis-github-bramin)
+- [Cognitive Services](https://azure.microsoft.com/services/cognitive-services?WT.mc_id=sentimentanalysis-github-bramin)
+- [Text Analytics](https://azure.microsoft.com/services/cognitive-services/text-analytics?WT.mc_id=sentimentanalysis-github-bramin)
+- [Sentiment Analysis API](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c9?WT.mc_id=sentimentanalysis-github-bramin)
