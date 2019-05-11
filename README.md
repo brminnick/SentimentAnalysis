@@ -1,5 +1,7 @@
 # Sentiment Analysis
 
+This app was made in conjunction with the Microsoft Blog "[Upgrade Your App With Sentiment Analysis](https://devblogs.microsoft.com/xamarin/upgrade-your-app-with-sentiment-analysis?WT.mc_id=sentimentanalysis-github-bramin)".
+
 | Happy Sentiment      | Sad Sentiment |
 |---------------------------|---------------------------
 | ![Happy Sentiment](https://user-images.githubusercontent.com/13558917/45384332-930a2a80-b5c2-11e8-93a3-120a5f574cfb.gif)|  ![Sad Sentiment](https://user-images.githubusercontent.com/13558917/45384333-93a2c100-b5c2-11e8-81d4-39cbe973164c.gif)|
