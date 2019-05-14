@@ -1,12 +1,12 @@
 # Sentiment Analysis
 
-This app was made in conjunction with the Microsoft Blog "[Upgrade Your App With Sentiment Analysis](https://devblogs.microsoft.com/xamarin/upgrade-your-app-with-sentiment-analysis?WT.mc_id=sentimentanalysis-github-bramin)".
+This app was made in conjunction with the Microsoft Blog, [Upgrade Your App With Sentiment Analysis](https://devblogs.microsoft.com/xamarin/upgrade-your-app-with-sentiment-analysis?WT.mc_id=SentimentAnalysis-github-bramin).
 
 | Happy Sentiment      | Sad Sentiment |
 |---------------------------|---------------------------
 | ![Happy Sentiment](https://user-images.githubusercontent.com/13558917/45384332-930a2a80-b5c2-11e8-93a3-120a5f574cfb.gif)|  ![Sad Sentiment](https://user-images.githubusercontent.com/13558917/45384333-93a2c100-b5c2-11e8-81d4-39cbe973164c.gif)|
 
-Microsoft's [Cognitive Services](https://azure.microsoft.com/services/cognitive-services/?WT.mc_id=none-XamarinBlog-bramin) team have created the [Sentiment Analysis API](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c9/?WT.mc_id=none-XamarinBlog-bramin) that uses machine learning to determine the sentiment of uploaded text. And the best part is, we don't need to be machine learning experts to use it.
+Microsoft's [Cognitive Services](https://azure.microsoft.com/services/cognitive-services?WT.mc_id=SentimentAnalysis-github-bramin) team have created the [Sentiment Analysis API](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c9/?WT.mc_id=SentimentAnalysis-github-bramin) that uses machine learning to determine the sentiment of uploaded text. And the best part is, we don't need to be machine learning experts to use it.
 
 I just submit the text as a POST Request:
 
@@ -42,7 +42,7 @@ Scores close to 0 indicate negative sentiment, while scores close to 1 indicate 
 
 ## Learn More
 
-- [Upgrade Your App With Sentiment Analysis | Microsoft Blog](https://devblogs.microsoft.com/xamarin/upgrade-your-app-with-sentiment-analysis?WT.mc_id=sentimentanalysis-github-bramin)
-- [Cognitive Services](https://azure.microsoft.com/services/cognitive-services?WT.mc_id=sentimentanalysis-github-bramin)
-- [Text Analytics](https://azure.microsoft.com/services/cognitive-services/text-analytics?WT.mc_id=sentimentanalysis-github-bramin)
-- [Sentiment Analysis API](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c9?WT.mc_id=sentimentanalysis-github-bramin)
+- [Upgrade Your App With Sentiment Analysis | Microsoft Blog](https://devblogs.microsoft.com/xamarin/upgrade-your-app-with-sentiment-analysis?WT.mc_id=SentimentAnalysis-github-bramin)
+- [Cognitive Services](https://azure.microsoft.com/services/cognitive-services?WT.mc_id=SentimentAnalysis-github-bramin)
+- [Text Analytics](https://azure.microsoft.com/services/cognitive-services/text-analytics?WT.mc_id=SentimentAnalysis-github-bramin)
+- [Sentiment Analysis API](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c9?WT.mc_id=SentimentAnalysis-github-bramin)
