@@ -133,7 +133,7 @@
         <Reference Include="Xamarin.iOS" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
+        <PackageReference Include="Xamarin.Forms" Version="4.0.0.540366" />
         <PackageReference Include="Microsoft.Azure.CognitiveServices.Language.TextAnalytics" Version="3.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
         <PackageReference Include="Xamarin.TestCloud.Agent" Version="0.21.8" />

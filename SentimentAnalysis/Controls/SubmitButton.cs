@@ -9,7 +9,7 @@ namespace SentimentAnalysis
             TextColor = Color.White;
             BackgroundColor = Color.Transparent;
             BorderColor = Color.White;
-            BorderRadius = 10;
+            CornerRadius = 10;
             BorderWidth = 2;
         }
     }
