@@ -6,7 +6,7 @@ using SentimentAnalysis.Shared;
 
 namespace SentimentAnalysis.UITest
 {
-    public class SentimentTests : BaseTest
+    class SentimentTests : BaseTest
     {
         public SentimentTests(Platform platform) : base(platform)
         {

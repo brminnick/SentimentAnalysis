@@ -5,17 +5,11 @@ namespace SentimentAnalysis.UITest
 {
     public static class AppInitializer
     {
-        public static IApp StartApp(Platform platform)
+        public static IApp StartApp(Platform platform) => platform switch
         {
-            switch (platform)
-            {
-                case Platform.iOS:
-                    return ConfigureApp.iOS.StartApp();
-                case Platform.Android:
-                    return ConfigureApp.Android.StartApp();
-                default:
-                    throw new NotSupportedException();
-            }
-        }
+            Platform.iOS => ConfigureApp.iOS.StartApp(),
+            Platform.Android => ConfigureApp.Android.StartApp(),
+            _ => throw new NotSupportedException(),
+        };
     }
 }

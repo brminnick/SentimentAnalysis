@@ -1,41 +1,45 @@
 ﻿using System;
-using System.Net;
-using System.Linq;
-using System.Windows.Input;
-using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
-
-using Microsoft.Azure.CognitiveServices.Language.TextAnalytics;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using AsyncAwaitBestPractices;
+using AsyncAwaitBestPractices.MVVM;
 using Microsoft.Azure.CognitiveServices.Language.TextAnalytics.Models;
-
-using Xamarin.Forms;
-
 using SentimentAnalysis.Shared;
+using Xamarin.Forms;
 
 namespace SentimentAnalysis
 {
     public class SentimentViewModel : INotifyPropertyChanged
     {
-        #region Fields
+        readonly WeakEventManager<string> _sentimentAnalysisFailedEventManager = new WeakEventManager<string>();
+        readonly WeakEventManager _propertyChangedEventManager = new WeakEventManager();
+
         string _emojiLabelText = string.Empty;
         string _userInputEntryText = string.Empty;
         bool _isInternetConnectionActive;
-        ICommand _submitButtonCommand;
+        ICommand? _submitButtonCommand;
         Color _backgroundColor = ColorConstants.DefaultBackgroundColor;
-        #endregion
 
-        #region Events
-        public event EventHandler<string> SentimentAnalyisFailed;
-        public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
+        public event EventHandler<string> SentimentAnalyisFailed
+        {
+            add => _sentimentAnalysisFailedEventManager.AddEventHandler(value);
+            remove => _sentimentAnalysisFailedEventManager.RemoveEventHandler(value);
+        }
 
-        #region Properties
+        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+        {
+            add => _propertyChangedEventManager.AddEventHandler(value);
+            remove => _propertyChangedEventManager.RemoveEventHandler(value);
+        }
+
         public bool IsInternetConnectionInactive => !IsInternetConnectionActive;
 
-        public ICommand SubmitButtonCommand => _submitButtonCommand ??
-            (_submitButtonCommand = new Command(async () => await ExecuteSubmitButtonCommand(UserInputEntryText).ConfigureAwait(false)));
+        public ICommand SubmitButtonCommand => _submitButtonCommand ??= new AsyncCommand(() => ExecuteSubmitButtonCommand(UserInputEntryText));
 
         public bool IsInternetConnectionActive
         {
@@ -60,9 +64,7 @@ namespace SentimentAnalysis
             get => _backgroundColor;
             set => SetProperty(ref _backgroundColor, value);
         }
-        #endregion
 
-        #region Methods
         async Task ExecuteSubmitButtonCommand(string userInputEntryText)
         {
             SetIsBusy(true);
@@ -80,7 +82,7 @@ namespace SentimentAnalysis
                     SetEmoji((double)result);
                 }
             }
-            catch (ErrorResponseException e) when (e.Response.StatusCode.Equals(HttpStatusCode.Unauthorized))
+            catch (ErrorResponseException e) when (e.Response.StatusCode is HttpStatusCode.Unauthorized)
             {
                 OnSentimentAnalyisFailed("Invalid API Key");
             }
@@ -102,70 +104,46 @@ namespace SentimentAnalysis
             }
         }
 
-        void SetEmoji(double result)
+        void SetEmoji(in double result)
         {
-            switch (result)
+            EmojiLabelText = result switch
             {
-                case double number when (number < 0.4):
-                    EmojiLabelText = EmojiConstants.SadFaceEmoji;
-                    break;
-                case double number when (number >= 0.4 && number <= 0.6):
-                    EmojiLabelText = EmojiConstants.NeutralFaceEmoji;
-                    break;
-                case double number when (number > 0.6):
-                    EmojiLabelText = EmojiConstants.HappyFaceEmoji;
-                    break;
-            }
+                double number when (number < 0.4) => EmojiConstants.SadFaceEmoji,
+                double number when (number >= 0.4 && number <= 0.6) => EmojiConstants.NeutralFaceEmoji,
+                double number when (number > 0.6) => EmojiConstants.HappyFaceEmoji,
+                _ => throw new ArgumentOutOfRangeException(nameof(result))
+            };
         }
 
-        void SetBackgroundColor(double result)
+        void SetBackgroundColor(in double result)
         {
-            switch (result)
+            BackgroundColor = result switch
             {
-                case double number when (number <= 0.1):
-                    BackgroundColor = ColorConstants.EmotionColor1;
-                    break;
-                case double number when (number > 0.1 && number <= 0.2):
-                    BackgroundColor = ColorConstants.EmotionColor2;
-                    break;
-                case double number when (number > 0.2 && number <= 0.3):
-                    BackgroundColor = ColorConstants.EmotionColor3;
-                    break;
-                case double number when (number > 0.3 && number <= 0.4):
-                    BackgroundColor = ColorConstants.EmotionColor4;
-                    break;
-                case double number when (number > 0.4 && number <= 0.6):
-                    BackgroundColor = ColorConstants.EmotionColor5;
-                    break;
-                case double number when (number > 0.6 && number <= 0.7):
-                    BackgroundColor = ColorConstants.EmotionColor6;
-                    break;
-                case double number when (number > 0.7 && number <= 0.8):
-                    BackgroundColor = ColorConstants.EmotionColor7;
-                    break;
-                case double number when (number > 0.8 && number <= 0.9):
-                    BackgroundColor = ColorConstants.EmotionColor8;
-                    break;
-                case double number when (number > 0.9):
-                    BackgroundColor = ColorConstants.EmotionColor9;
-                    break;
-            }
+                double number when (number <= 0.1) => ColorConstants.EmotionColor1,
+                double number when (number > 0.1 && number <= 0.2) => ColorConstants.EmotionColor2,
+                double number when (number > 0.2 && number <= 0.3) => ColorConstants.EmotionColor3,
+                double number when (number > 0.3 && number <= 0.4) => ColorConstants.EmotionColor4,
+                double number when (number > 0.4 && number <= 0.6) => ColorConstants.EmotionColor5,
+                double number when (number > 0.6 && number <= 0.7) => ColorConstants.EmotionColor6,
+                double number when (number > 0.7 && number <= 0.8) => ColorConstants.EmotionColor7,
+                double number when (number > 0.8 && number <= 0.9) => ColorConstants.EmotionColor8,
+                double number when (number > 0.9) => ColorConstants.EmotionColor9,
+                _ => throw new ArgumentOutOfRangeException(nameof(result))
+            };
         }
 
-        void SetIsBusy(bool isBusy)
+        void SetIsBusy(in bool isBusy)
         {
-            switch (isBusy)
+            if (isBusy)
             {
-                case true:
-                    BackgroundColor = ColorConstants.DefaultBackgroundColor;
-                    EmojiLabelText = string.Empty;
-                    break;
+                BackgroundColor = ColorConstants.DefaultBackgroundColor;
+                EmojiLabelText = string.Empty;
             }
 
             IsInternetConnectionActive = isBusy;
         }
 
-        void SetProperty<T>(ref T backingStore, T value, Action onChanged = null, [CallerMemberName] string propertyname = "")
+        void SetProperty<T>(ref T backingStore, in T value, in Action? onChanged = null, [CallerMemberName] in string propertyname = "")
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
                 return;
@@ -177,10 +155,9 @@ namespace SentimentAnalysis
             OnPropertyChanged(propertyname);
         }
 
-        void OnPropertyChanged([CallerMemberName]string propertyName = "") =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        void OnPropertyChanged([CallerMemberName] in string propertyName = "") =>
+            _propertyChangedEventManager.HandleEvent(this, new PropertyChangedEventArgs(propertyName), nameof(INotifyPropertyChanged.PropertyChanged));
 
-        void OnSentimentAnalyisFailed(string errorMessage) => SentimentAnalyisFailed?.Invoke(this, errorMessage);
-        #endregion
+        void OnSentimentAnalyisFailed(string errorMessage) => _sentimentAnalysisFailedEventManager.HandleEvent(this, errorMessage, nameof(SentimentAnalyisFailed));
     }
 }

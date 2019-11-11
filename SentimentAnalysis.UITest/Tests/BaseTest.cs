@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 using Xamarin.UITest;
 
@@ -6,28 +7,23 @@ namespace SentimentAnalysis.UITest
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
-    public abstract class BaseTest
+    abstract class BaseTest
     {
-        #region Constant Fields
         readonly Platform _platform;
-        #endregion
 
-        #region Constructors
+        IApp? _app;
+        SentimentPage? _sentimentPage;
+
         protected BaseTest(Platform platform) => _platform = platform;
-        #endregion
 
-        #region Properties
-        protected IApp App { get; private set; }
-        protected SentimentPage SentimentPage { get; private set; }
-        #endregion
+        protected IApp App => _app ?? throw new NullReferenceException();
+        protected SentimentPage SentimentPage => _sentimentPage ?? throw new NullReferenceException();
 
-        #region Methods
         [SetUp]
         public virtual void TestSetup()
         {
-            App = AppInitializer.StartApp(_platform);
-
-            SentimentPage = new SentimentPage(App);
+            _app = AppInitializer.StartApp(_platform);
+            _sentimentPage = new SentimentPage(App);
 
             App.Screenshot("App Launched");
         }
@@ -36,7 +32,9 @@ namespace SentimentAnalysis.UITest
         public virtual void TestTearDown()
         {
         }
-        #endregion
-    }
 
+        [Test]
+        [Ignore("REPL Used for Testing")]
+        public void ReplTest() => App.Repl();
+    }
 }

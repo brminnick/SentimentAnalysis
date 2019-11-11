@@ -11,6 +11,7 @@
         <RootNamespace>SentimentAnalysis.iOS</RootNamespace>
         <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
         <AssemblyName>SentimentAnalysis.iOS</AssemblyName>
+        <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
         <NuGetPackageImportStamp>
         </NuGetPackageImportStamp>
     </PropertyGroup>
@@ -133,10 +134,15 @@
         <Reference Include="Xamarin.iOS" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Xamarin.Forms" Version="4.0.0.540366" />
-        <PackageReference Include="Microsoft.Azure.CognitiveServices.Language.TextAnalytics" Version="3.0.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-        <PackageReference Include="Xamarin.TestCloud.Agent" Version="0.21.8" />
+        <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />
+        <PackageReference Include="Microsoft.Azure.CognitiveServices.Language.TextAnalytics" Version="4.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="AsyncAwaitBestPractices.MVVM">
+          <Version>4.0.0-pre2</Version>
+        </PackageReference>
+        <PackageReference Include="Xamarin.TestCloud.Agent">
+          <Version>0.21.8</Version>
+        </PackageReference>
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\SentimentAnalysis\SentimentAnalysis.csproj">

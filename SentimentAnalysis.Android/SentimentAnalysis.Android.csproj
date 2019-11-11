@@ -16,8 +16,9 @@
         <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
         <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
         <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-        <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
         <AndroidStoreUncompressedFileExtensions />
+        <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
         <MandroidI18n />
         <JavaMaximumHeapSize />
         <JavaOptions />
@@ -37,6 +38,7 @@
         <AndroidSupportedAbis>armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
         <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
         <AndroidTlsProvider>btls</AndroidTlsProvider>
+        <AndroidDexTool>d8</AndroidDexTool>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <DebugType>pdbonly</DebugType>
@@ -50,6 +52,7 @@
         <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
         <AotAssemblies>true</AotAssemblies>
         <AndroidTlsProvider>btls</AndroidTlsProvider>
+        <AndroidDexTool>d8</AndroidDexTool>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="Microsoft.CSharp" />
@@ -63,9 +66,12 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Xamarin.Forms" Version="4.0.0.540366" />
-        <PackageReference Include="Microsoft.Azure.CognitiveServices.Language.TextAnalytics" Version="3.0.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+        <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />
+        <PackageReference Include="Microsoft.Azure.CognitiveServices.Language.TextAnalytics" Version="4.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="AsyncAwaitBestPractices.MVVM">
+          <Version>4.0.0-pre2</Version>
+        </PackageReference>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="MainActivity.cs" />
