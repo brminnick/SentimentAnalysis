@@ -20,7 +20,7 @@ namespace SentimentAnalysis.UITest
             _emojiResultsLabel = x => x.Marked(AutomationIdConstants.EmojiResultsLabel);
         }
 
-        public string EmojiResultsText => App.Query(_emojiResultsLabel).First().Text;
+        public string EmojiResultsText => App.Query(_emojiResultsLabel).FirstOrDefault()?.Text ?? App.Query(_emojiResultsLabel).First().Label;
 
         public void TapSubmitButton()
         {

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AsyncAwaitBestPractices;
 using AsyncAwaitBestPractices.MVVM;
-using Microsoft.Azure.CognitiveServices.Language.TextAnalytics.Models;
+using Azure.AI.TextAnalytics;
 using SentimentAnalysis.Shared;
 using Xamarin.Forms;
 
@@ -71,28 +69,9 @@ namespace SentimentAnalysis
 
             try
             {
-                var result = await TextAnalysisService.GetSentiment(userInputEntryText).ConfigureAwait(false);
-                if (result is null)
-                {
-                    OnSentimentAnalyisFailed("No Results Returned");
-                }
-                else
-                {
-                    SetBackgroundColor((double)result);
-                    SetEmoji((double)result);
-                }
-            }
-            catch (ErrorResponseException e) when (e.Response.StatusCode is HttpStatusCode.Unauthorized)
-            {
-                OnSentimentAnalyisFailed("Invalid API Key");
-            }
-            catch (Microsoft.Rest.ValidationException)
-            {
-                OnSentimentAnalyisFailed("API Key Cannot Be Null");
-            }
-            catch (AggregateException e) when (e.InnerExceptions.Select(x => x.Message).Any(x => x.Contains("Missing input documents")))
-            {
-                OnSentimentAnalyisFailed("No Text Submitted");
+                var sentiment = await TextAnalysisService.GetSentiment(userInputEntryText).ConfigureAwait(false);
+                SetBackgroundColor(sentiment);
+                SetEmoji(sentiment);
             }
             catch (Exception e)
             {
@@ -104,31 +83,27 @@ namespace SentimentAnalysis
             }
         }
 
-        void SetEmoji(in double result)
+        void SetEmoji(in TextSentiment sentiment)
         {
-            EmojiLabelText = result switch
+            EmojiLabelText = sentiment switch
             {
-                double number when (number < 0.4) => EmojiConstants.SadFaceEmoji,
-                double number when (number >= 0.4 && number <= 0.6) => EmojiConstants.NeutralFaceEmoji,
-                double number when (number > 0.6) => EmojiConstants.HappyFaceEmoji,
-                _ => throw new ArgumentOutOfRangeException(nameof(result))
+                TextSentiment.Negative => EmojiConstants.SadFaceEmoji,
+                TextSentiment.Mixed => EmojiConstants.NeutralFaceEmoji,
+                TextSentiment.Neutral => EmojiConstants.NeutralFaceEmoji,
+                TextSentiment.Positive => EmojiConstants.HappyFaceEmoji,
+                _ => throw new NotSupportedException()
             };
         }
 
-        void SetBackgroundColor(in double result)
+        void SetBackgroundColor(in TextSentiment sentiment)
         {
-            BackgroundColor = result switch
+            BackgroundColor = sentiment switch
             {
-                double number when (number <= 0.1) => ColorConstants.EmotionColor1,
-                double number when (number > 0.1 && number <= 0.2) => ColorConstants.EmotionColor2,
-                double number when (number > 0.2 && number <= 0.3) => ColorConstants.EmotionColor3,
-                double number when (number > 0.3 && number <= 0.4) => ColorConstants.EmotionColor4,
-                double number when (number > 0.4 && number <= 0.6) => ColorConstants.EmotionColor5,
-                double number when (number > 0.6 && number <= 0.7) => ColorConstants.EmotionColor6,
-                double number when (number > 0.7 && number <= 0.8) => ColorConstants.EmotionColor7,
-                double number when (number > 0.8 && number <= 0.9) => ColorConstants.EmotionColor8,
-                double number when (number > 0.9) => ColorConstants.EmotionColor9,
-                _ => throw new ArgumentOutOfRangeException(nameof(result))
+                TextSentiment.Negative => ColorConstants.NegativeSentiment,
+                TextSentiment.Mixed => ColorConstants.NeutralSentiment,
+                TextSentiment.Neutral => ColorConstants.NeutralSentiment,
+                TextSentiment.Positive => ColorConstants.PositiveSentiment,
+                _ => throw new NotSupportedException()
             };
         }
 
