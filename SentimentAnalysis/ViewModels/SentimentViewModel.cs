@@ -20,7 +20,7 @@ namespace SentimentAnalysis
         string _emojiLabelText = string.Empty;
         string _userInputEntryText = string.Empty;
         bool _isInternetConnectionActive;
-        ICommand? _submitButtonCommand;
+        IAsyncCommand? _submitButtonCommand;
         Color _backgroundColor = ColorConstants.DefaultBackgroundColor;
 
         public event EventHandler<string> SentimentAnalyisFailed
@@ -35,14 +35,12 @@ namespace SentimentAnalysis
             remove => _propertyChangedEventManager.RemoveEventHandler(value);
         }
 
-        public bool IsInternetConnectionInactive => !IsInternetConnectionActive;
-
-        public ICommand SubmitButtonCommand => _submitButtonCommand ??= new AsyncCommand(() => ExecuteSubmitButtonCommand(UserInputEntryText));
+        public IAsyncCommand SubmitButtonCommand => _submitButtonCommand ??= new AsyncCommand(() => ExecuteSubmitButtonCommand(UserInputEntryText), _ => !IsInternetConnectionActive);
 
         public bool IsInternetConnectionActive
         {
             get => _isInternetConnectionActive;
-            set => SetProperty(ref _isInternetConnectionActive, value, () => OnPropertyChanged(nameof(IsInternetConnectionInactive)));
+            set => SetProperty(ref _isInternetConnectionActive, value, () => Device.BeginInvokeOnMainThread(SubmitButtonCommand.RaiseCanExecuteChanged));
         }
 
         public string EmojiLabelText
@@ -70,6 +68,7 @@ namespace SentimentAnalysis
             try
             {
                 var sentiment = await TextAnalysisService.GetSentiment(userInputEntryText).ConfigureAwait(false);
+
                 SetBackgroundColor(sentiment);
                 SetEmoji(sentiment);
             }

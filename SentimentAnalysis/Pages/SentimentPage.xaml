@@ -38,7 +38,6 @@
             FontSize= "Large"
             TextColor= "White"
             Command="{Binding SubmitButtonCommand}"
-            IsEnabled="{Binding IsInternetConnectionInactive}"
             BorderRadius="0" BorderWidth="1" BorderColor = "White"
             HorizontalOptions= "FillAndExpand" VerticalOptions= "Center" 
             AutomationId="{x:Static sharedConstants:AutomationIdConstants.SubmitButton}" />

@@ -66,10 +66,10 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Xamarin.Forms" Version="4.6.0.529-pre3" />
+        <PackageReference Include="Xamarin.Forms" Version="4.7.0.813-pre2" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-        <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="4.1.1-pre1" />
-        <PackageReference Include="Azure.AI.TextAnalytics" Version="1.0.0-preview.4" />
+        <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="4.1.1" />
+        <PackageReference Include="Azure.AI.TextAnalytics" Version="1.0.0-preview.5" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="MainActivity.cs" />
