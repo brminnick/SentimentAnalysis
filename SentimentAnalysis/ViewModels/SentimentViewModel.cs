@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using AsyncAwaitBestPractices;
 using AsyncAwaitBestPractices.MVVM;
 using Azure.AI.TextAnalytics;
@@ -14,8 +13,8 @@ namespace SentimentAnalysis
 {
     public class SentimentViewModel : INotifyPropertyChanged
     {
-        readonly WeakEventManager<string> _sentimentAnalysisFailedEventManager = new WeakEventManager<string>();
-        readonly WeakEventManager _propertyChangedEventManager = new WeakEventManager();
+        readonly WeakEventManager<string> _sentimentAnalysisFailedEventManager = new();
+        readonly AsyncAwaitBestPractices.WeakEventManager _propertyChangedEventManager = new();
 
         string _emojiLabelText = string.Empty;
         string _userInputEntryText = string.Empty;
@@ -130,8 +129,8 @@ namespace SentimentAnalysis
         }
 
         void OnPropertyChanged([CallerMemberName] in string propertyName = "") =>
-            _propertyChangedEventManager.HandleEvent(this, new PropertyChangedEventArgs(propertyName), nameof(INotifyPropertyChanged.PropertyChanged));
+            _propertyChangedEventManager.RaiseEvent(this, new PropertyChangedEventArgs(propertyName), nameof(INotifyPropertyChanged.PropertyChanged));
 
-        void OnSentimentAnalyisFailed(string errorMessage) => _sentimentAnalysisFailedEventManager.HandleEvent(this, errorMessage, nameof(SentimentAnalyisFailed));
+        void OnSentimentAnalyisFailed(string errorMessage) => _sentimentAnalysisFailedEventManager.RaiseEvent(this, errorMessage, nameof(SentimentAnalyisFailed));
     }
 }
